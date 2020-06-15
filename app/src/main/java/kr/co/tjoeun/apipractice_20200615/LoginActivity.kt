@@ -36,12 +36,15 @@ class LoginActivity : BaseActivity() {
                     }
                     else {
 //                        로그인 실패
-//                        UI반영 : 토스트로 "로그인 실패" 출력
+//                        UI반영 : 토스트로 서버가 알려주는 실패 사유를 출력
 //                         인터넷 => 백그라운드 쓰레드 => UI 접근 => 강제종료
 //                        UI쓰레드가 => 토스트를 띄우도록
 
+                        val message = json.getString("message")
+
+
                         runOnUiThread {
-                            Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
 
                     }
