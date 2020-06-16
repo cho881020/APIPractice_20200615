@@ -10,6 +10,8 @@ import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
 
+    val topicList = ArrayList<Topic>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,6 +37,9 @@ class MainActivity : BaseActivity() {
 
 //                    주제 하나에 대응되는 JSON을 넣어서 Topic객체로 얻어내자.
                     val topic = Topic.getTopicFromJson(topicJson)
+
+//                    받아온 주제 목록을 리스트뷰의 재료로 추가
+                    topicList.add(topic)
                 }
 
             }
