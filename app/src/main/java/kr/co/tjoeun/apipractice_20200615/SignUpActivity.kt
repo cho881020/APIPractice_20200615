@@ -56,6 +56,27 @@ class SignUpActivity : BaseActivity() {
 
 //            각 순서대로 검사 => 틀린게 발견되면 어디서 틀렸는지 토스트로 띄우고 클릭이벤트 종료
 
+            val inputEmail = emailEdt.text.toString()
+            val inputNickName = nickNameEdt.text.toString()
+
+
+//            서버에 회원가입 요청
+            ServerUtil.putRequestSignUp(mContext, inputEmail, inputPassword, inputNickName, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+                        runOnUiThread {
+                            Toast.makeText(mContext, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                    }
+
+                }
+
+            })
+
         }
 
         nickNameCheckBtn.setOnClickListener {
