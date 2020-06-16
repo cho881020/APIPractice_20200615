@@ -48,6 +48,12 @@ class LoginActivity : BaseActivity() {
 //                        폰에 아예 저장해두는게 편리함. => ContextUtil에 저장기능.
                         ContextUtil.setUserToken(mContext, token)
 
+//                        Intent로 메인화면 진입 => finish
+                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        startActivity(myIntent)
+
+                        finish()
+
                     }
                     else {
 //                        로그인 실패
