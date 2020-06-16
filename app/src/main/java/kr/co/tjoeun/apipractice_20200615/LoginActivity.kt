@@ -39,6 +39,8 @@ class LoginActivity : BaseActivity() {
 
                     if (codeNumber == 200) {
 //                        로그인 성공
+
+
                     }
                     else {
 //                        로그인 실패
