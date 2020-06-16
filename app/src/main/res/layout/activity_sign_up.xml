@@ -34,6 +34,9 @@
 
     </FrameLayout>
 
+<!--    닉네임 중복검사 -->
+<!--    닉네임 입력 => 중복확인 클릭 => 서버 결과 텍스트뷰 반영 -->
+
     <TextView
         android:id="@+id/emailCheckResultTxt"
         android:layout_width="wrap_content"

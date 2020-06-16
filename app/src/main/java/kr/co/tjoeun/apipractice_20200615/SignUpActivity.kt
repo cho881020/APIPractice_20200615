@@ -17,6 +17,28 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        nickNameCheckBtn.setOnClickListener {
+            val nick = nickNameEdt.text.toString()
+
+            ServerUtil.getRequestDuplicatedCheck(mContext, "NICK_NAME", nick, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    runOnUiThread {
+                        if (code == 200) {
+                            nickNameCheckResultTxt.text = "사용해도 좋습니다."
+                        }
+                        else {
+                            nickNameCheckResultTxt.text = "사용할 수 없는 닉네임입니다."
+                        }
+                    }
+
+
+                }
+            })
+        }
+
         emailCheckBtn.setOnClickListener {
 
 //            입력한 이메일 받아오기
