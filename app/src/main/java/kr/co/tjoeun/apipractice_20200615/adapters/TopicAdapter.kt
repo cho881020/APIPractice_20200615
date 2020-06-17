@@ -28,6 +28,12 @@ class TopicAdapter(
 //        row가 절대 null 아님을 보장하면서 대입
         val row = tempRow!!
 
+        val topicImg = row.findViewById<ImageView>(R.id.topicImg)
+        val topicTitleTxt = row.findViewById<TextView>(R.id.topicTitleTxt)
+
+        val data = mList[position]
+
+        topicTitleTxt.text = data.title
         
 //        완성된 row를 리스트뷰의 재료로 리턴
         return row

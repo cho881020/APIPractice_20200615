@@ -49,8 +49,11 @@ class MainActivity : BaseActivity() {
                     topicList.add(topic)
                 }
 
+                runOnUiThread {
+
 //                리스트뷰의 내용 추가
-                topicAdapter.notifyDataSetChanged()
+                    topicAdapter.notifyDataSetChanged()
+                }
 
             }
 
