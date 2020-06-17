@@ -29,7 +29,11 @@ class MainActivity : BaseActivity() {
     override fun setupEvents() {
 
         topicListView.setOnItemClickListener { parent, view, position, id ->
+
+            val clickedTopic = topicList[position]
+
             val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+            myIntent.putExtra("topic_id", clickedTopic.id)
             startActivity(myIntent)
         }
 
