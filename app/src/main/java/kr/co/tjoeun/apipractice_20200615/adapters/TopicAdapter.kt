@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import kr.co.tjoeun.apipractice_20200615.R
 import kr.co.tjoeun.apipractice_20200615.datas.Topic
 
@@ -34,7 +35,8 @@ class TopicAdapter(
         val data = mList[position]
 
         topicTitleTxt.text = data.title
-        
+        Glide.with(mContext).load(data.imageUrl).into(topicImg)
+
 //        완성된 row를 리스트뷰의 재료로 리턴
         return row
         
