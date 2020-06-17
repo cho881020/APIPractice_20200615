@@ -11,6 +11,7 @@ class ContextUtil {
 
 //        저장할 항목들의 이름을 변수로 생성
         val USER_TOKEN = "USER_TOKEN"
+        val AUTO_LOGIN = "AUTO_LOGIN"
 
 //        항목에 데이터 저장 (setter) or 불러오기 (getter)
 
@@ -24,7 +25,15 @@ class ContextUtil {
             return pref.getString(USER_TOKEN, "")!!
         }
 
+        fun setAutoLogin (context: Context, autoLogin : Boolean) {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            pref.edit().putBoolean(AUTO_LOGIN, autoLogin).apply()
+        }
 
+        fun isAutoLogin (context: Context) : Boolean {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            return pref.getBoolean(AUTO_LOGIN, false)
+        }
 
     }
 
