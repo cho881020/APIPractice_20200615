@@ -1,6 +1,8 @@
 package kr.co.tjoeun.apipractice_20200615.datas
 
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TopicReply {
 
@@ -11,6 +13,9 @@ class TopicReply {
     var userId = 0
 
     lateinit var writer : User
+
+//    작성일시를 시간 형태로 저장 변수 => 기본값 : 현재 시간
+    val createdAt = Calendar.getInstance()
 
     companion object {
 
@@ -25,6 +30,16 @@ class TopicReply {
 
             val userObj = json.getJSONObject("user")
             tr.writer = User.getUserFromJson(userObj)
+
+//            의견 작성 시간 파싱 => 우선 String으로 가져와야함.
+            val createdAtStr = json.getString("created_at")
+//            String => tr.creatdAt (Calendar) 의 시간으로 반영
+
+//            String을 분석할 양식을 클래스로 생성 => SimpleDateFormat
+            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+//            파싱중인 의견의 작성시간을 => String으로 분석한 서버에서 알려준 작성시간으로 대입.
+            tr.createdAt.time = sdf.parse(createdAtStr)!!
 
             return tr
         }

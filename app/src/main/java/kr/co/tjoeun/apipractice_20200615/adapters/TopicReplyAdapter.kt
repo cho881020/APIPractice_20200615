@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import kr.co.tjoeun.apipractice_20200615.R
 import kr.co.tjoeun.apipractice_20200615.datas.Topic
 import kr.co.tjoeun.apipractice_20200615.datas.TopicReply
+import java.text.SimpleDateFormat
 
 class TopicReplyAdapter(
     val mContext:Context,
@@ -33,6 +34,7 @@ class TopicReplyAdapter(
 //        XML에서 뷰 가져오기
         val contentTxt = row.findViewById<TextView>(R.id.contentTxt)
         val writerNickNameTxt = row.findViewById<TextView>(R.id.writerNickNameTxt)
+        val writeTimeTxt = row.findViewById<TextView>(R.id.writeTimeTxt)
 
 //        뿌려줄 데이터 가져오기
         val data = mList[position]
@@ -41,6 +43,10 @@ class TopicReplyAdapter(
 
         contentTxt.text = data.content
         writerNickNameTxt.text = data.writer.nickName
+
+//        5월 2일 오전/오후 8시 ?분 양식 출력
+        val sdf = SimpleDateFormat("M월 d일 a h시 m분")
+        writeTimeTxt.text = sdf.format(data.createdAt.time)
 
 //        완성된 row를 리스트뷰의 재료로 리턴
         return row
