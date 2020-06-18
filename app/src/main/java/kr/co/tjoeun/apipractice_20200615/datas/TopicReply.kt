@@ -10,6 +10,8 @@ class TopicReply {
     var sideId = 0
     var userId = 0
 
+    lateinit var writer : User
+
     companion object {
 
         fun getTopicReplyFromJson(json: JSONObject) : TopicReply {
@@ -20,6 +22,9 @@ class TopicReply {
             tr.topicId = json.getInt("topic_id")
             tr.sideId = json.getInt("side_id")
             tr.userId = json.getInt("user_id")
+
+            val userObj = json.getJSONObject("user")
+            tr.writer = User.getUserFromJson(userObj)
 
             return tr
         }
