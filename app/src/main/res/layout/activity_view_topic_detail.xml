@@ -38,6 +38,7 @@
                 tools:text="주제 제목 자리" />
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -47,6 +48,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/firstSideTitleTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="첫번째 진영"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"/>
+
                 </LinearLayout>
 
                 <TextView
@@ -54,12 +63,23 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
                     android:text="Vs."
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:textSize="16sp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/secondSideTitleTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="두번째 진영"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"/>
+
 
                 </LinearLayout>
 
