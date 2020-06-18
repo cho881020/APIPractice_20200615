@@ -14,6 +14,10 @@ class Topic {
     //   내가 선택한 진영이 첫번째? 두번째? 선택 안했는지? 변수
     var mySelectedSideIndex = -1 // 선택안됨 : -1, 그 외 숫자 : 발견된 위치 (index)
 
+
+//    의견 목록이 담길 배열
+    var replyList = ArrayList<TopicReply>()
+
     companion object {
         fun getTopicFromJson(json : JSONObject) : Topic {
             val topic = Topic()
@@ -48,6 +52,15 @@ class Topic {
 //                    진영들을 돌다가 => 내가 선택한걸 찾았으면 => 그게몇번째였는지를 기록.
                     topic.mySelectedSideIndex = i
                 }
+            }
+
+
+//            의견 목록 JSONArray 파싱
+
+            val replies = json.getJSONArray("replies")
+            for (i in 0..replies.length()-1) {
+//                JSONArray의 i번째 추출 => TopicReply로 변환 => topic.의견목록에 추가
+                topic.replyList.add(TopicReply.getTopicReplyFromJson(replies.getJSONObject(i)))
             }
 
            return topic
