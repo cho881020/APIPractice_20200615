@@ -41,6 +41,15 @@ class TopicReply {
 //            파싱중인 의견의 작성시간을 => String으로 분석한 서버에서 알려준 작성시간으로 대입.
             tr.createdAt.time = sdf.parse(createdAtStr)!!
 
+//            내 폰에 설정된 시간대를 확인하고 => 시차 보정
+            val myPhoneTimeZone = tr.createdAt.timeZone // 어느 지역 시간대인지 따서 저장(서울)
+
+//            몇시간 차이 나는지 저장  => 밀리초단위의 시차 => 시간 변경
+            val timeOffset = myPhoneTimeZone.rawOffset / 1000 / 60 / 60
+
+//            게시글 작성시간을 timeOffset만큼 변경
+            tr.createdAt.add(Calendar.HOUR, timeOffset)
+
             return tr
         }
 
