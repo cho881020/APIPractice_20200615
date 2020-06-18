@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kr.co.tjoeun.apipractice_20200615.adapters.TopicReplyAdapter
 import kr.co.tjoeun.apipractice_20200615.datas.Topic
 import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
 import org.json.JSONObject
@@ -17,6 +18,9 @@ class ViewTopicDetailActivity : BaseActivity() {
     var mTopicId = -1
 //    서버에서 받아온 주제 정보를 저장할 멤버변수
     lateinit var mTopic : Topic
+
+//    의견 목록을 뿌려주는 어댑터
+    lateinit var mReplyAdapter : TopicReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +106,9 @@ class ViewTopicDetailActivity : BaseActivity() {
                         voteToSecondSideBtn.text = "투표취소"
                     }
 
+//                    주제가 들고있는 => 의견 목록을 리스트뷰에 뿌려주기
+                    mReplyAdapter = TopicReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.replyList)
+                    replyListView.adapter = mReplyAdapter
                 }
 
             }
