@@ -28,6 +28,26 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        두개의 투표하기 버튼 이벤트 추가
+        voteToFirstSideBtn.setOnClickListener {
+
+            ServerUtil.postRequestVote(mContext, mTopic.sideList[0].id, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                }
+            })
+
+
+        }
+
+        voteToSecondSideBtn.setOnClickListener {
+            ServerUtil.postRequestVote(mContext, mTopic.sideList[1].id, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                }
+            })
+        }
+
     }
 
     override fun setValues() {
