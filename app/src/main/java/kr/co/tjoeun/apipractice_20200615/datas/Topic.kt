@@ -14,6 +14,9 @@ class Topic {
     //   내가 선택한 진영이 첫번째? 두번째? 선택 안했는지? 변수
     var mySelectedSideIndex = -1 // 선택안됨 : -1, 그 외 숫자 : 발견된 위치 (index)
 
+//    내가 선택한 진영 정보 => 투표를 안했으면 mySideInfo는 null이어야 함.
+    var mySideInfo : TopicSide? = null
+
 
 //    의견 목록이 담길 배열
     var replyList = ArrayList<TopicReply>()
@@ -61,6 +64,12 @@ class Topic {
             for (i in 0..replies.length()-1) {
 //                JSONArray의 i번째 추출 => TopicReply로 변환 => topic.의견목록에 추가
                 topic.replyList.add(TopicReply.getTopicReplyFromJson(replies.getJSONObject(i)))
+            }
+
+//            내 선택 진영 파싱 => 투표를 안했으면 null 임.
+//            null이 아닐때만 파싱하는걸로 처리.
+            if (!json.isNull("my_side")) {
+                topic.mySideInfo = TopicSide.getTopicSideFromJson(json.getJSONObject("my_side"))
             }
 
            return topic
