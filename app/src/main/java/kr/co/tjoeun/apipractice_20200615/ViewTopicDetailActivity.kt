@@ -1,5 +1,6 @@
 package kr.co.tjoeun.apipractice_20200615
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -31,6 +32,17 @@ class ViewTopicDetailActivity : BaseActivity() {
 
 
     override fun setupEvents() {
+
+//        의견 등록하기 버튼 이벤트 추가
+        postReplyBtn.setOnClickListener {
+//            의견 작성 화면으로 이동
+
+            val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            startActivity(myIntent)
+
+
+        }
+
 
 //        두개의 투표하기 버튼 이벤트 추가
         voteToFirstSideBtn.setOnClickListener {
