@@ -89,6 +89,12 @@ class ViewTopicDetailActivity : BaseActivity() {
             return
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+//        화면이 다시 나타날때 마다 => 서버에서 주제 최신으로 갱신.
 //       제대로 id값을 받아온 경우 => 서버에 해당 토픽 진행상황 조회
         getTopicDetailFromServer()
     }
