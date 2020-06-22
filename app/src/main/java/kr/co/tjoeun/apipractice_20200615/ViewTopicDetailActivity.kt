@@ -37,8 +37,21 @@ class ViewTopicDetailActivity : BaseActivity() {
         postReplyBtn.setOnClickListener {
 //            의견 작성 화면으로 이동
 
-            val myIntent = Intent(mContext, EditReplyActivity::class.java)
-            startActivity(myIntent)
+//            선택진영이 있을때만 (투표를 했어야만) 의견 작성 화면 이동
+
+            mTopic.mySideInfo?.let {
+                val myIntent = Intent(mContext, EditReplyActivity::class.java)
+                myIntent.putExtra("topicTitle", mTopic.title)
+                myIntent.putExtra("mySideTitle", it.title)
+                startActivity(myIntent)
+            }.let {
+                if (it == null) {
+//                null이 맞을때 (투표 안했을때)
+                    Toast.makeText(mContext, "투표를 해야만 의견 작성이 가능합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
 
 
         }
