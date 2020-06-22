@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -36,6 +37,10 @@ class TopicReplyAdapter(
         val writerNickNameTxt = row.findViewById<TextView>(R.id.writerNickNameTxt)
         val writeTimeTxt = row.findViewById<TextView>(R.id.writeTimeTxt)
 
+        val replyBtn = row.findViewById<Button>(R.id.replyBtn)
+        val likeBtn = row.findViewById<Button>(R.id.likeBtn)
+        val dislikeBtn = row.findViewById<Button>(R.id.dislikeBtn)
+
 //        뿌려줄 데이터 가져오기
         val data = mList[position]
 
@@ -47,6 +52,11 @@ class TopicReplyAdapter(
 //        5월 2일 오전/오후 8시 ?분 양식 출력
         val sdf = SimpleDateFormat("M월 d일 a h시 m분")
         writeTimeTxt.text = sdf.format(data.createdAt.time)
+
+//        좋아요 / 싫어요 / 답글 갯수 표시
+        likeBtn.text = "좋아요 : ${data.likeCount}개"
+        dislikeBtn.text = "싫어요 : ${data.dislikeCount}개"
+        replyBtn.text = "답글 : ${data.replyCount}개"
 
 //        완성된 row를 리스트뷰의 재료로 리턴
         return row

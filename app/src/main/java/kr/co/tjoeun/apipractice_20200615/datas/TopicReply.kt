@@ -17,6 +17,12 @@ class TopicReply {
 //    작성일시를 시간 형태로 저장 변수 => 기본값 : 현재 시간
     val createdAt = Calendar.getInstance()
 
+//    좋아요 / 싫어요 / 답글 갯수
+    var likeCount = 0
+    var dislikeCount = 0
+    var replyCount = 0
+
+
     companion object {
 
         fun getTopicReplyFromJson(json: JSONObject) : TopicReply {
@@ -49,6 +55,14 @@ class TopicReply {
 
 //            게시글 작성시간을 timeOffset만큼 변경
             tr.createdAt.add(Calendar.HOUR, timeOffset)
+
+//            좋아요 / 싫어요 / 답글 갯수를 추가 파싱 => 목록 화면에 반영
+
+            tr.likeCount = json.getInt("like_count")
+            tr.dislikeCount = json.getInt("dislike_count")
+            tr.replyCount = json.getInt("reply_count")
+
+
 
             return tr
         }
