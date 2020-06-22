@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import kr.co.tjoeun.apipractice_20200615.R
 import kr.co.tjoeun.apipractice_20200615.datas.Topic
 import kr.co.tjoeun.apipractice_20200615.datas.TopicReply
+import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 
 class TopicReplyAdapter(
@@ -63,6 +65,30 @@ class TopicReplyAdapter(
 //        선택 진영 정보 반영
 
         selectedSideTitleTxt.text = "(${data.selectedSide.title})"
+
+//        좋아요 / 싫어요 클릭 이벤트 처리
+
+        val likeOrDislikeEvent = View.OnClickListener {
+
+//            좋아요 : is_like - true
+//            싫어요 : is_like - false
+
+
+//            눌린 버튼의 id값이 => R.id.like인지 비교. 맞다면 true (좋아요 버튼) 아니라면 (싫어요버튼)
+            val isLike = it.id == R.id.likeBtn
+
+            ServerUtil.postRequestReplyLikeOrDislike(mContext, data.id, isLike, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                }
+            })
+
+        }
+
+//        좋아요도 싫어요도 할일이 likeOrDislikeEvent 안에 적혀있다.
+        likeBtn.setOnClickListener(likeOrDislikeEvent)
+        dislikeBtn.setOnClickListener(likeOrDislikeEvent)
+
 
 //        완성된 row를 리스트뷰의 재료로 리턴
         return row
