@@ -41,6 +41,8 @@ class TopicReplyAdapter(
         val likeBtn = row.findViewById<Button>(R.id.likeBtn)
         val dislikeBtn = row.findViewById<Button>(R.id.dislikeBtn)
 
+        val selectedSideTitleTxt = row.findViewById<TextView>(R.id.selectedSideTitleTxt)
+
 //        뿌려줄 데이터 가져오기
         val data = mList[position]
 
@@ -57,6 +59,10 @@ class TopicReplyAdapter(
         likeBtn.text = "좋아요 : ${data.likeCount}개"
         dislikeBtn.text = "싫어요 : ${data.dislikeCount}개"
         replyBtn.text = "답글 : ${data.replyCount}개"
+
+//        선택 진영 정보 반영
+
+        selectedSideTitleTxt.text = "(${data.selectedSide.title})"
 
 //        완성된 row를 리스트뷰의 재료로 리턴
         return row

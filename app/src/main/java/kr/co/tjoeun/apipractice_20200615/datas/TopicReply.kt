@@ -22,6 +22,9 @@ class TopicReply {
     var dislikeCount = 0
     var replyCount = 0
 
+//    의견이 어떤 진영을 옹호하는지.
+    lateinit var selectedSide : TopicSide
+
 
     companion object {
 
@@ -63,6 +66,8 @@ class TopicReply {
             tr.replyCount = json.getInt("reply_count")
 
 
+//            선택 진영 정보 파싱 => selected_side JSON => TopicSide 전환
+            tr.selectedSide = TopicSide.getTopicSideFromJson(json.getJSONObject("selected_side"))
 
             return tr
         }
