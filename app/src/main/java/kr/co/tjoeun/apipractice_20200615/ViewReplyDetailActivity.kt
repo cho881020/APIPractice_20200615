@@ -1,7 +1,9 @@
 package kr.co.tjoeun.apipractice_20200615
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import kr.co.tjoeun.apipractice_20200615.adapters.TopicReReplyAdapter
@@ -107,6 +109,11 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 //                    리스트뷰의 스크롤을 맨 밑 (마지막 포지션) 으로 이동
                     reReplyListView.smoothScrollToPosition(mReReplyList.size - 1)
+
+//                    키보드 숨김 처리
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(contentEdt.windowToken, 0)
+
                 }
 
             }
