@@ -64,6 +64,25 @@ class TopicReplyAdapter(
         dislikeBtn.text = "싫어요 : ${data.dislikeCount}개"
         replyBtn.text = "답글 : ${data.replyCount}개"
 
+//        내 좋아요 여부 / 싫어요 여부 표시
+//        내 좋아요 : 좋아요 빨강 / 싫어요 회색
+//        내 싫어요 : 좋아요 회색 / 싫어요 파랑
+//        그 외 (둘다 안찍은경우) : 좋아요 싫어요 둘다 회색
+
+        if (data.isMyLike) {
+            likeBtn.setBackgroundResource(R.drawable.red_border_box)
+            dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+        }
+        else if (data.isMyDislike) {
+            likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
+        }
+        else {
+            likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+        }
+
+
 //        선택 진영 정보 반영
 
         selectedSideTitleTxt.text = "(${data.selectedSide.title})"
@@ -89,6 +108,10 @@ class TopicReplyAdapter(
 //                    data변수 내부 값중 좋아요 /싫어요 갯수 변경
                     data.likeCount = reply.getInt("like_count")
                     data.dislikeCount = reply.getInt("dislike_count")
+
+//                    data변수 내부 값중 내 좋아요 / 싫어요 변경
+                    data.isMyLike = reply.getBoolean("my_like")
+                    data.isMyDislike = reply.getBoolean("my_dislike")
 
 //                    리스트뷰에 뿌려지는 데이터에 내용 변경 => notifyDataSetChanged 필요
 //                    어댑터변수.notify~ 실행. 어댑터변수 X.
