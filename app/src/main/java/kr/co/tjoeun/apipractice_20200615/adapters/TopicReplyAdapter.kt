@@ -151,6 +151,7 @@ class TopicReplyAdapter(
 
         replyBtn.setOnClickListener {
             val myIntent = Intent(mContext, ViewReplyDetailActivity::class.java)
+            myIntent.putExtra("replyId", data.id)
             mContext.startActivity(myIntent)
         }
 
