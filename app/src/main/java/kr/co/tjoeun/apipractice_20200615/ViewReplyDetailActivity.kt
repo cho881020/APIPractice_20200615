@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
+import kr.co.tjoeun.apipractice_20200615.adapters.TopicReReplyAdapter
 import kr.co.tjoeun.apipractice_20200615.datas.TopicReply
 import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
 import org.json.JSONObject
@@ -19,6 +20,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 //    서버에서 보내주는 답글 목록을 저장할 배열
     val mReReplyList = ArrayList<TopicReply>()
+
+//    답글 목록 뿌리는 어댑터
+    lateinit var mReReplyAdapter : TopicReReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 
     override fun setValues() {
         mReplyId = intent.getIntExtra("replyId", -1)
+
+        mReReplyAdapter = TopicReReplyAdapter(mContext, R.layout.topic_re_reply_list_item, mReReplyList)
+        reReplyListView.adapter = mReReplyAdapter
     }
 
     override fun onResume() {
@@ -68,10 +75,23 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 //                이부분에서 mReReplyList를 채워넣고 => 새로고침 하자.
 
+//                reply내부의 답글 목록 JSONArray를 이용해서 채워넣자.
+
+                val replies = reply.getJSONArray("replies")
+
+                for (i in 0..replies.length()-1) {
+                    val replyObj = TopicReply.getTopicReplyFromJson(replies.getJSONObject(i))
+
+                    mReReplyList.add(replyObj)
+                }
+
+
                 runOnUiThread {
                     contentTxt.text = mReply.content
                     writerNickNameTxt.text = mReply.writer.nickName
                     selectedSideTitleTxt.text = "(${mReply.selectedSide.title})"
+
+                    mReReplyAdapter.notifyDataSetChanged()
                 }
 
             }
