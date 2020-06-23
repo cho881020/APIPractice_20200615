@@ -1,6 +1,7 @@
 package kr.co.tjoeun.apipractice_20200615.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import kr.co.tjoeun.apipractice_20200615.R
+import kr.co.tjoeun.apipractice_20200615.ViewReplyDetailActivity
 import kr.co.tjoeun.apipractice_20200615.datas.Topic
 import kr.co.tjoeun.apipractice_20200615.datas.TopicReply
 import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
@@ -144,6 +146,13 @@ class TopicReplyAdapter(
 //        좋아요도 싫어요도 할일이 likeOrDislikeEvent 안에 적혀있다.
         likeBtn.setOnClickListener(likeOrDislikeEvent)
         dislikeBtn.setOnClickListener(likeOrDislikeEvent)
+
+//        답글 버튼을 누르면 의견 상세 조회 화면으로 이동
+
+        replyBtn.setOnClickListener {
+            val myIntent = Intent(mContext, ViewReplyDetailActivity::class.java)
+            mContext.startActivity(myIntent)
+        }
 
 
 //        완성된 row를 리스트뷰의 재료로 리턴
