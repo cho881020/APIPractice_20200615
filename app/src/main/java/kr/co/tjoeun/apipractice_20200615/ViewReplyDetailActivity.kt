@@ -2,6 +2,7 @@ package kr.co.tjoeun.apipractice_20200615
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import kr.co.tjoeun.apipractice_20200615.datas.TopicReply
 import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
@@ -23,6 +24,24 @@ class ViewReplyDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        postBtn.setOnClickListener {
+
+            val inputContent = contentEdt.text.toString()
+
+            if (inputContent.length < 5) {
+                Toast.makeText(mContext, "답글의 길이는 5자 이상이어야합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            ServerUtil.postRequestReReply(mContext, mReplyId, inputContent, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                }
+
+            })
+
+        }
 
     }
 
