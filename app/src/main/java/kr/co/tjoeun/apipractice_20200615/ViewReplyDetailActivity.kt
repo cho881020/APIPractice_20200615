@@ -10,11 +10,15 @@ import org.json.JSONObject
 
 class ViewReplyDetailActivity : BaseActivity() {
 
+
 //    어떤 의견에 대해 보러온건지
     var mReplyId = -1
 
 //    서버에서 받아온 의견 저장
     lateinit var mReply : TopicReply
+
+//    서버에서 보내주는 답글 목록을 저장할 배열
+    val mReReplyList = ArrayList<TopicReply>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +65,8 @@ class ViewReplyDetailActivity : BaseActivity() {
                 val data = json.getJSONObject("data")
                 val reply = data.getJSONObject("reply")
                 mReply = TopicReply.getTopicReplyFromJson(reply)
+
+//                이부분에서 mReReplyList를 채워넣고 => 새로고침 하자.
 
                 runOnUiThread {
                     contentTxt.text = mReply.content
