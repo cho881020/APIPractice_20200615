@@ -68,18 +68,31 @@ class TopicReplyAdapter(
 //        내 좋아요 : 좋아요 빨강 / 싫어요 회색
 //        내 싫어요 : 좋아요 회색 / 싫어요 파랑
 //        그 외 (둘다 안찍은경우) : 좋아요 싫어요 둘다 회색
+//        글씨 색도 같은 색으로.
 
         if (data.isMyLike) {
             likeBtn.setBackgroundResource(R.drawable.red_border_box)
             dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.naverRed))
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.gray))
+
         }
         else if (data.isMyDislike) {
             likeBtn.setBackgroundResource(R.drawable.gray_border_box)
             dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
+
+
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.gray))
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.naverBlue))
         }
         else {
             likeBtn.setBackgroundResource(R.drawable.gray_border_box)
             dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+
+
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.gray))
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.gray))
         }
 
 
