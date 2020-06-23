@@ -25,6 +25,10 @@ class TopicReply {
 //    의견이 어떤 진영을 옹호하는지.
     lateinit var selectedSide : TopicSide
 
+//    내가 좋아요 / 싫어요를 찍었는지
+    var isMyLike = false
+    var isMyDislike = false
+
 
     companion object {
 
@@ -68,6 +72,10 @@ class TopicReply {
 
 //            선택 진영 정보 파싱 => selected_side JSON => TopicSide 전환
             tr.selectedSide = TopicSide.getTopicSideFromJson(json.getJSONObject("selected_side"))
+
+//            실제 좋아요 여부 싫어요 여부 파싱
+            tr.isMyLike = json.getBoolean("my_like")
+            tr.isMyDislike = json.getBoolean("my_dislike")
 
             return tr
         }
