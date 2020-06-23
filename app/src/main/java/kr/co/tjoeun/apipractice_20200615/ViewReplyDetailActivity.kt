@@ -45,6 +45,15 @@ class ViewReplyDetailActivity : BaseActivity() {
             ServerUtil.postRequestReReply(mContext, mReplyId, inputContent, object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(json: JSONObject) {
 
+//                    입력한 답글의 내용도 비워주기.
+                    runOnUiThread {
+                        contentEdt.setText("")
+                        Toast.makeText(mContext, "답글을 등록했습니다.", Toast.LENGTH_SHORT).show()
+                    }
+
+//                    의견에 달린 답글들을 다시 불러와서 리스트뷰에 뿌려주기
+                    getReplyDetailFromServer()
+
                 }
 
             })
@@ -75,6 +84,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 //                이부분에서 mReReplyList를 채워넣고 => 새로고침 하자.
 
+//                mReReplyList 내부에 이미 들어있던 데이터가 중복으로 나와서 문제 발생.
+                mReReplyList.clear()
+
 //                reply내부의 답글 목록 JSONArray를 이용해서 채워넣자.
 
                 val replies = reply.getJSONArray("replies")
@@ -92,6 +104,9 @@ class ViewReplyDetailActivity : BaseActivity() {
                     selectedSideTitleTxt.text = "(${mReply.selectedSide.title})"
 
                     mReReplyAdapter.notifyDataSetChanged()
+
+//                    리스트뷰의 스크롤을 맨 밑 (마지막 포지션) 으로 이동
+                    reReplyListView.smoothScrollToPosition(mReReplyList.size - 1)
                 }
 
             }
