@@ -71,6 +71,9 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+//        화면 제목 변경
+        setTitle("토론 목록")
+
         topicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, topicList)
         topicListView.adapter = topicAdapter
 
