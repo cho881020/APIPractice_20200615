@@ -23,7 +23,7 @@
             android:layout_marginTop="5dp"
             android:textSize="12sp"
             android:textColor="@color/gray"
-            android:text="~분 전"/>
+            android:text="답글 테스트입니다. 적은 내용 자리"/>
 
 
     </LinearLayout>
