@@ -2,6 +2,7 @@ package kr.co.tjoeun.apipractice_20200615
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 class NotificationListActivity : BaseActivity() {
 
@@ -17,6 +18,9 @@ class NotificationListActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+//        Base에서 상속받은 알림버튼 숨기기
+        notificaionBtn.visibility = View.GONE
 
     }
 
