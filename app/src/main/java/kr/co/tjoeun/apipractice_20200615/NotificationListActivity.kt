@@ -3,6 +3,8 @@ package kr.co.tjoeun.apipractice_20200615
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.activity_notification_list.*
+import kr.co.tjoeun.apipractice_20200615.adapters.NotificationAdapter
 import kr.co.tjoeun.apipractice_20200615.datas.Notification
 import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
 import org.json.JSONObject
@@ -10,6 +12,8 @@ import org.json.JSONObject
 class NotificationListActivity : BaseActivity() {
 
     val mNotiList = ArrayList<Notification>()
+
+    lateinit var mNotiAdapter : NotificationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,9 @@ class NotificationListActivity : BaseActivity() {
 
 //        Base에서 상속받은 알림버튼 숨기기
         notificaionBtn.visibility = View.GONE
+
+        mNotiAdapter = NotificationAdapter(mContext, R.layout.notification_list_item, mNotiList)
+        notiListView.adapter = mNotiAdapter
 
     }
 
@@ -54,7 +61,7 @@ class NotificationListActivity : BaseActivity() {
                 }
 
                 runOnUiThread {
-
+                    mNotiAdapter.notifyDataSetChanged()
                 }
 
             }
