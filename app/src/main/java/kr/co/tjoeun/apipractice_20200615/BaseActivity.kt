@@ -1,6 +1,8 @@
 package kr.co.tjoeun.apipractice_20200615
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +12,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     val mContext = this
 
-//    제목을 나타내는 텍스트뷰
+//    제목을 나타내는 텍스트뷰 (제목 설정시에만 등장)
     lateinit var activityTitleTxt : TextView
+//    제목에 쓸 말이 없을때 보여줄 이미지뷰 (기본 설정)
+    lateinit var logoImg : ImageView
 
     abstract fun setupEvents()
     abstract fun setValues()
@@ -34,6 +38,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
 //        액션바가 있을때만 실행 => 타이틀 문구 변경
         supportActionBar?.let {
+
+//            로고를 숨기고 => 글씨로 보여지도록
+            logoImg.visibility = View.GONE
+            activityTitleTxt.visibility = View.VISIBLE
+
             activityTitleTxt.text = title
         }
 
@@ -57,6 +66,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
 //        XML에 있는 뷰들을 사용할 수 있도록 연결
         activityTitleTxt = supportActionBar!!.customView.findViewById(R.id.activityTitleTxt)
+        logoImg = supportActionBar!!.customView.findViewById(R.id.logoImg)
 
     }
 
