@@ -22,4 +22,12 @@
         android:text="액티비티 이름 자리"
         android:textSize="18sp" />
 
+    <ImageView
+        android:id="@+id/notificaionBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="5dp"/>
+
 </FrameLayout>

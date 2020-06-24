@@ -1,5 +1,6 @@
 package kr.co.tjoeun.apipractice_20200615
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -16,6 +17,9 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var activityTitleTxt : TextView
 //    제목에 쓸 말이 없을때 보여줄 이미지뷰 (기본 설정)
     lateinit var logoImg : ImageView
+
+//    알림 목록에 들어가는 버튼
+    lateinit var notificaionBtn : ImageView
 
     abstract fun setupEvents()
     abstract fun setValues()
@@ -67,6 +71,13 @@ abstract class BaseActivity : AppCompatActivity() {
 //        XML에 있는 뷰들을 사용할 수 있도록 연결
         activityTitleTxt = supportActionBar!!.customView.findViewById(R.id.activityTitleTxt)
         logoImg = supportActionBar!!.customView.findViewById(R.id.logoImg)
+        notificaionBtn = supportActionBar!!.customView.findViewById(R.id.notificaionBtn)
+
+//        알림버튼은 눌리면 어느화면에서건 => 알림화면으로 이동.
+        notificaionBtn.setOnClickListener {
+            val myIntent = Intent(mContext, NotificationListActivity::class.java)
+            startActivity(myIntent)
+        }
 
     }
 
