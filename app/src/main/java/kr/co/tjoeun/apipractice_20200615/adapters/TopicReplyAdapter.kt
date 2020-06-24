@@ -17,6 +17,7 @@ import kr.co.tjoeun.apipractice_20200615.ViewReplyDetailActivity
 import kr.co.tjoeun.apipractice_20200615.datas.Topic
 import kr.co.tjoeun.apipractice_20200615.datas.TopicReply
 import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
+import kr.co.tjoeun.apipractice_20200615.utils.TimeUtil
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 
@@ -57,9 +58,7 @@ class TopicReplyAdapter(
         contentTxt.text = data.content
         writerNickNameTxt.text = data.writer.nickName
 
-//        5월 2일 오전/오후 8시 ?분 양식 출력
-        val sdf = SimpleDateFormat("M월 d일 a h시 m분")
-        writeTimeTxt.text = sdf.format(data.createdAt.time)
+        writeTimeTxt.text = TimeUtil.getTimeAgoFromCalendar(data.createdAt)
 
 //        좋아요 / 싫어요 / 답글 갯수 표시
         likeBtn.text = "좋아요 : ${data.likeCount}개"
