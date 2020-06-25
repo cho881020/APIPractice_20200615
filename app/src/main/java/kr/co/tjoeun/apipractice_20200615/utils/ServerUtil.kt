@@ -307,6 +307,48 @@ class ServerUtil {
         }
 
 
+        //        알림을 어디까지 읽었는지 알려주는 post로 요청하는 함수
+        fun postRequestNotification(context:Context, notiId:Int, handler: JsonResponseHandler?) {
+
+            val client = OkHttpClient()
+
+            val urlString = "${BASE_URL}/notification"
+
+            val formData = FormBody.Builder()
+                .add("noti_id", notiId.toString())
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getUserToken(context))  // API에서 헤더를 요구하면 여기서 첨부.
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+//                    연결 자체에 실패한 경우
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+//                    서버 연결 성공 => 어떤 내용이던 응답은 받은 경우
+//                    서버의 응답중 본문을 String으로 저장
+                    val bodyString = response.body!!.string()
+
+//                    본문 String을 => JSON형태로 변환 => 변수에 저장
+                    val json = JSONObject(bodyString)
+                    Log.d("JSON응답", json.toString())
+
+//                    JSON 파싱은 => 화면에서 진행하도록 처리. (인터페이스의 역할)
+                    handler?.onResponse(json)
+
+                }
+
+            })
+
+
+        }
+
+
         //       의견/답글에 대한 좋아요/싫어요 기능을 post로 요청하는 함수
         fun postRequestReplyLikeOrDislike(context:Context, replyId:Int, isLike:Boolean, handler: JsonResponseHandler?) {
 
