@@ -3,6 +3,7 @@ package kr.co.tjoeun.apipractice_20200615
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
@@ -19,6 +20,7 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var logoImg : ImageView
 
 //    알림 목록에 들어가는 버튼
+    lateinit var notiFrameLayout : FrameLayout
     lateinit var notificaionBtn : ImageView
 
     abstract fun setupEvents()
@@ -72,6 +74,7 @@ abstract class BaseActivity : AppCompatActivity() {
         activityTitleTxt = supportActionBar!!.customView.findViewById(R.id.activityTitleTxt)
         logoImg = supportActionBar!!.customView.findViewById(R.id.logoImg)
         notificaionBtn = supportActionBar!!.customView.findViewById(R.id.notificaionBtn)
+        notiFrameLayout = supportActionBar!!.customView.findViewById(R.id.notiFrameLayout)
 
 //        알림버튼은 눌리면 어느화면에서건 => 알림화면으로 이동.
         notificaionBtn.setOnClickListener {

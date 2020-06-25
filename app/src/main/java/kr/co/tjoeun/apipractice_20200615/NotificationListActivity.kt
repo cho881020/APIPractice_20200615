@@ -28,8 +28,8 @@ class NotificationListActivity : BaseActivity() {
 
     override fun setValues() {
 
-//        Base에서 상속받은 알림버튼 숨기기
-        notificaionBtn.visibility = View.GONE
+//        Base에서 상속받은 알림 레이아웃 통째로 숨기기
+        notiFrameLayout.visibility = View.GONE
 
         mNotiAdapter = NotificationAdapter(mContext, R.layout.notification_list_item, mNotiList)
         notiListView.adapter = mNotiAdapter
