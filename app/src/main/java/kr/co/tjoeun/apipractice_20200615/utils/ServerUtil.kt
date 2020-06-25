@@ -103,12 +103,12 @@ class ServerUtil {
         }
 
         //        알림 목록을 get으로 요청하는 함수
-        fun getRequestNotificaionList(context: Context, handler: JsonResponseHandler?) {
+        fun getRequestNotificaionList(context: Context, needAllNotis:Boolean, handler: JsonResponseHandler?) {
 
             val client = OkHttpClient()
 
             val urlBuilder = "${BASE_URL}/notification".toHttpUrlOrNull()!!.newBuilder()
-//            urlBuilder.addEncodedQueryParameter("type", type)
+            urlBuilder.addEncodedQueryParameter("need_all_notis", needAllNotis.toString())
 //            urlBuilder.addEncodedQueryParameter("value", input)
 
             val urlString = urlBuilder.build().toString()

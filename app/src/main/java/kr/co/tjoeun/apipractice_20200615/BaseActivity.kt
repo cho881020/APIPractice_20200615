@@ -96,7 +96,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onResume()
 
         supportActionBar?.let {
-            ServerUtil.getRequestNotificaionList(mContext, object : ServerUtil.JsonResponseHandler {
+            ServerUtil.getRequestNotificaionList(mContext, false, object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(json: JSONObject) {
 
                     val data = json.getJSONObject("data")
