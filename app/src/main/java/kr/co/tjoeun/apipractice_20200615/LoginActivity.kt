@@ -3,6 +3,7 @@ package kr.co.tjoeun.apipractice_20200615
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 import kr.co.tjoeun.apipractice_20200615.utils.ContextUtil
@@ -93,6 +94,8 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        notiFrameLayout.visibility = View.GONE
 
     }
 

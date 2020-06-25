@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import kr.co.tjoeun.apipractice_20200615.utils.ContextUtil
 import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
 import org.json.JSONObject
 
@@ -96,34 +97,42 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onResume()
 
         supportActionBar?.let {
-            ServerUtil.getRequestNotificaionList(mContext, false, object : ServerUtil.JsonResponseHandler {
-                override fun onResponse(json: JSONObject) {
 
-                    val data = json.getJSONObject("data")
-                    val unreadNotiCount = data.getInt("unread_noty_count")
+//            로그인한 상태 (토큰이 있어야만) 알림 갯수 호출
 
-                    runOnUiThread {
+            if (ContextUtil.getUserToken(mContext) != "") {
+
+                ServerUtil.getRequestNotificaionList(mContext, false, object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(json: JSONObject) {
+
+                        val data = json.getJSONObject("data")
+                        val unreadNotiCount = data.getInt("unread_noty_count")
+
+                        runOnUiThread {
 
 //                    안읽은게 있다면
-                        if (unreadNotiCount > 0) {
+                            if (unreadNotiCount > 0) {
 
 //                        빨간색 동그라미 표시 + 몇갠지 글자도 표기
-                            unreadNotiCountTxt.visibility = View.VISIBLE
-                            unreadNotiCountTxt.text = unreadNotiCount.toString()
+                                unreadNotiCountTxt.visibility = View.VISIBLE
+                                unreadNotiCountTxt.text = unreadNotiCount.toString()
 
-                        }
-                        else {
+                            }
+                            else {
 
 //                        안읽은게 없다면 => 빨간 동그라미 자체를 숨김처리
-                            unreadNotiCountTxt.visibility = View.GONE
+                                unreadNotiCountTxt.visibility = View.GONE
+
+                            }
 
                         }
 
                     }
 
-                }
+                })
 
-            })
+            }
+
         }
 
 
