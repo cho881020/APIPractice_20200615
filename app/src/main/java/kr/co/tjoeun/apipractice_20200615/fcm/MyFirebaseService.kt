@@ -16,6 +16,7 @@ class MyFirebaseService : FirebaseMessagingService() {
     }
 
 //    실제 푸시알림 수신시 실행되는 함수
+//    앱을 화면에 띄운 상태에서 수신시에 실행되는 함수
 
     override fun onMessageReceived(p0: RemoteMessage) {
         super.onMessageReceived(p0)

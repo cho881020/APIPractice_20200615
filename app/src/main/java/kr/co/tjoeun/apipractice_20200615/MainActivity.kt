@@ -4,9 +4,11 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.tjoeun.apipractice_20200615.adapters.TopicAdapter
 import kr.co.tjoeun.apipractice_20200615.datas.Topic
@@ -76,6 +78,9 @@ class MainActivity : BaseActivity() {
 
         topicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, topicList)
         topicListView.adapter = topicAdapter
+
+//        기기의 고유 값 (DeviceToken)이 어떤 값인지?
+        Log.d("기기토큰값", FirebaseInstanceId.getInstance().token)
 
 //        진행중인 토론 목록이 어떤게 있는지? 서버에 물어보자.
         ServerUtil.getRequestMainInfo(mContext, object : ServerUtil.JsonResponseHandler {
