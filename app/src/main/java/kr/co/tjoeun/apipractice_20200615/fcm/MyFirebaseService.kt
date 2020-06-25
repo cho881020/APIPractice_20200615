@@ -2,6 +2,7 @@ package kr.co.tjoeun.apipractice_20200615.fcm
 
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseService : FirebaseMessagingService() {
 
@@ -13,5 +14,14 @@ class MyFirebaseService : FirebaseMessagingService() {
         Log.d("새 토큰 발급", p0)
 
     }
+
+//    실제 푸시알림 수신시 실행되는 함수
+
+    override fun onMessageReceived(p0: RemoteMessage) {
+        super.onMessageReceived(p0)
+
+        Log.d("푸시알림 수신", p0.notification?.title)
+    }
+
 
 }
