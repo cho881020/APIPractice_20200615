@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import kr.co.tjoeun.apipractice_20200615.utils.ServerUtil
+import org.json.JSONObject
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -22,6 +24,8 @@ abstract class BaseActivity : AppCompatActivity() {
 //    알림 목록에 들어가는 버튼
     lateinit var notiFrameLayout : FrameLayout
     lateinit var notificaionBtn : ImageView
+
+    lateinit var unreadNotiCountTxt : TextView
 
     abstract fun setupEvents()
     abstract fun setValues()
@@ -75,12 +79,54 @@ abstract class BaseActivity : AppCompatActivity() {
         logoImg = supportActionBar!!.customView.findViewById(R.id.logoImg)
         notificaionBtn = supportActionBar!!.customView.findViewById(R.id.notificaionBtn)
         notiFrameLayout = supportActionBar!!.customView.findViewById(R.id.notiFrameLayout)
+        unreadNotiCountTxt = supportActionBar!!.customView.findViewById(R.id.unreadNotiCountTxt)
 
 //        알림버튼은 눌리면 어느화면에서건 => 알림화면으로 이동.
         notificaionBtn.setOnClickListener {
             val myIntent = Intent(mContext, NotificationListActivity::class.java)
             startActivity(myIntent)
         }
+
+    }
+
+//    모든 화면에서 (액션바가 있다면) 알림 갯수를 받아와서 표시
+//    화면에 돌아올때 마다 실행
+
+    override fun onResume() {
+        super.onResume()
+
+        supportActionBar?.let {
+            ServerUtil.getRequestNotificaionList(mContext, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                    val data = json.getJSONObject("data")
+                    val unreadNotiCount = data.getInt("unread_noty_count")
+
+                    runOnUiThread {
+
+//                    안읽은게 있다면
+                        if (unreadNotiCount > 0) {
+
+//                        빨간색 동그라미 표시 + 몇갠지 글자도 표기
+                            unreadNotiCountTxt.visibility = View.VISIBLE
+                            unreadNotiCountTxt.text = unreadNotiCount.toString()
+
+                        }
+                        else {
+
+//                        안읽은게 없다면 => 빨간 동그라미 자체를 숨김처리
+                            unreadNotiCountTxt.visibility = View.GONE
+
+                        }
+
+                    }
+
+                }
+
+            })
+        }
+
+
 
     }
 
